@@ -33,8 +33,8 @@ public class SpaceShip extends Sprite{
 		y += (step * direction1);
 		if(y < 0)
 			y = 0;
-		if(y > 650 - height)
-			 y = 650 - height;
+		if(y > 600 - height)
+			 y = 600 - height;
 	}
 
 
