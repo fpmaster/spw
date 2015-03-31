@@ -7,6 +7,7 @@ public class SpaceShip extends Sprite{
 
 	int step = 8;
 	
+	
 	public SpaceShip(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		
@@ -21,10 +22,20 @@ public class SpaceShip extends Sprite{
 
 	public void move(int direction){
 		x += (step * direction);
+		
 		if(x < 0)
 			x = 0;
 		if(x > 400 - width)
 			x = 400 - width;
+		
 	}
+	public void move_Y(int direction1){
+		y += (step * direction1);
+		if(y < 0)
+			y = 0;
+		if(y > 650 - height)
+			 y = 650 - height;
+	}
+
 
 }
