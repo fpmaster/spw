@@ -29,13 +29,7 @@ public class SpaceShip extends Sprite{
 			x = 400 - width;
 		
 	}
-	public void move_Y(int direction1){
-		y += (step * direction1);
-		if(y < 0)
-			y = 0;
-		if(y > 600 - height)
-			y = 600 - height;
-	}
+	
 
 
 }
