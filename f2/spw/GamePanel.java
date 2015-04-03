@@ -31,6 +31,23 @@ public class GamePanel extends JPanel {
 		
 		repaint();
 	}
+	
+	public void RandomColor(){
+	int R = (int)(Math.random()*256);
+	int G = (int)(Math.random()*256);
+	int B= (int)(Math.random()*256);
+	int y = (int)(Math.random()*20);
+	
+	
+	Color color = new Color(R, G, B);
+	Color color1 = new Color(0,0,0);
+	  System.out.println(color + "  " + y);
+	if(color == color.GREEN  || color == color.BLUE){
+	      color = color1;
+			
+		 }
+		big.setBackground(color);
+		}
 
 	@Override
 	public void paint(Graphics g) {

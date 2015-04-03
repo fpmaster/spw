@@ -63,6 +63,9 @@ public class GameEngine implements KeyListener, GameReporter{
 				e_iter.remove();
 				gp.sprites.remove(e);
 				score += 500;
+				if(score >= 5000 &&  score % 5000 == 0){
+				gp.RandomColor();
+				}
 			}
 		}
 		
