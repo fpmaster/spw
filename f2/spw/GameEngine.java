@@ -22,7 +22,8 @@ public class GameEngine implements KeyListener, GameReporter{
 	private long score = 0;
 	int a = 10;
 	int b = 363;
-	private double difficulty = 0.1;
+	private int time = 0;
+	private double difficulty = 0.05;
 	
 	public GameEngine(GamePanel gp, SpaceShip v) {
 		this.gp = gp;
@@ -52,6 +53,10 @@ public class GameEngine implements KeyListener, GameReporter{
 	}
 	
 	private void process(){
+		if(time >0)
+			time--;
+	
+	
 		if(Math.random() < difficulty){
 			generateEnemy();
 		}
@@ -78,14 +83,16 @@ public class GameEngine implements KeyListener, GameReporter{
 		for(Enemy e : enemies){
 			er = e.getRectangle();
 			if(er.intersects(vr)){
-			
+				if(time == 0){
 				a += 70;
 				b -= 70;
+				time = 25;
 				if(a > 363){
 					die();
 				}
 				return;
 			}
+		}
 		}
 		gp.HPgent(a,b);
 	}
