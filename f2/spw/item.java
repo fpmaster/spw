@@ -4,19 +4,20 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class Enemy extends Sprite{
-	public static final int Y_TO_FADE = 400;
-	public static final int Y_TO_DIE = 600;
-	
-	private int step = 12;
-	private boolean alive = true;
-	
-	public Enemy(int x, int y) {
-		
-		super(x, y, 5, 5);
-		
-	}
 
+import java.awt.Toolkit;
+import java.awt.Image;
+public class item extends Enemy{
+
+	private int step = 5;
+	private boolean alive = true;
+	//private boolean intersec = false; //check if this enemy hit with bullet
+	
+	public item(int x, int y) {
+		super(x, y);
+	}
+	
+	
 	@Override
 	public void draw(Graphics2D g) {
 		if(y < Y_TO_FADE)
@@ -25,9 +26,11 @@ public class Enemy extends Sprite{
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 
 					(float)(Y_TO_DIE - y)/(Y_TO_DIE - Y_TO_FADE)));
 		}
-		g.setColor(Color.BLUE);
-		g.fillRect(x, y, width, height);
+		//g.setColor(Color.RED);
+		//g.fillOval(x, y, width, height);
 		
+		Image img = Toolkit.getDefaultToolkit().getImage("hp.GIF");
+		g.drawImage(img, x, y, 50, 50, null); 
 	}
 
 	public void proceed(){
@@ -40,7 +43,5 @@ public class Enemy extends Sprite{
 	public boolean isAlive(){
 		return alive;
 	}
-	public void getIntersect(){
-		this.alive = false;
-	}
+	
 }

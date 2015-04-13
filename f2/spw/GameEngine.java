@@ -15,6 +15,7 @@ public class GameEngine implements KeyListener, GameReporter{
 	GamePanel gp;
 		
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();	
+	private ArrayList<Enemy> items = new ArrayList<Enemy>();
 	private SpaceShip v;	
 	
 	private Timer timer;
@@ -23,7 +24,9 @@ public class GameEngine implements KeyListener, GameReporter{
 	int a = 10;
 	int b = 363;
 	private int time = 0;
+	private int time1 = 0;
 	private double difficulty = 0.05;
+	private double difficulty1 = 0.003;
 	
 	public GameEngine(GamePanel gp, SpaceShip v) {
 		this.gp = gp;
@@ -52,16 +55,28 @@ public class GameEngine implements KeyListener, GameReporter{
 		enemies.add(e);
 	}
 	
+	private void generateItem(){
+				item e1 = new item((int)(Math.random()*390), 30);
+				gp.sprites1.add(e1);
+				items.add(e1);
+		}
+	
 	private void process(){
 		if(time >0)
 			time--;
-	
+		
+		if(time1 >0)
+			time1--;
 	
 		if(Math.random() < difficulty){
 			generateEnemy();
 		}
+		if(Math.random() < difficulty1){
+			generateItem();
+		}
 		
 		Iterator<Enemy> e_iter = enemies.iterator();
+		Iterator<Enemy> e_iter1 = items.iterator();
 		while(e_iter.hasNext()){
 			Enemy e = e_iter.next();
 			e.proceed();
@@ -76,10 +91,25 @@ public class GameEngine implements KeyListener, GameReporter{
 			}
 		}
 		
+		while(e_iter1.hasNext() ){
+				Enemy e1 = e_iter1.next();
+			//Enemy e1 = e_iter1.next();
+			e1.proceed();
+
+			if(!e1.isAlive()){
+				e_iter1.remove();
+				gp.sprites1.remove(e1);
+
+			}
+
+		}
+		
 		gp.updateGameUI(this);
 		
 		Rectangle2D.Double vr = v.getRectangle();
 		Rectangle2D.Double er;
+		Rectangle2D.Double er1; // item
+		
 		for(Enemy e : enemies){
 			er = e.getRectangle();
 			if(er.intersects(vr)){
@@ -94,6 +124,23 @@ public class GameEngine implements KeyListener, GameReporter{
 			}
 		}
 		}
+		// item intersec
+		for(Enemy e1 : items){
+				er1 = e1.getRectangle();
+				if(er1.intersects(vr)){
+					if(time1 == 0){
+						gp.sprites1.remove(e1);
+						e1.getIntersect();
+						
+						//System.out.println(item);
+					 time1 = 30;
+					return;
+					}
+				}
+			}
+		
+		
+		
 		gp.HPgent(a,b);
 	}
 	

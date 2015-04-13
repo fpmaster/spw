@@ -13,6 +13,7 @@ public class GamePanel extends JPanel {
 	private BufferedImage bi;	
 	Graphics2D big;
 	ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+	ArrayList<Sprite> sprites1 = new ArrayList<Sprite>();
 
 	public GamePanel() {
 		bi = new BufferedImage(400, 600, BufferedImage.TYPE_INT_ARGB);
@@ -29,6 +30,11 @@ public class GamePanel extends JPanel {
 	
 		for(Sprite s : sprites){
 			s.draw(big);
+		}
+		
+		for(Sprite s1 : sprites1){
+			s1.draw(big);
+			
 		}
 		
 		repaint();

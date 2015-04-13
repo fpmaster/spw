@@ -12,7 +12,7 @@ public class SpaceShip extends Sprite{
 	
 	
 	public SpaceShip(int x, int y, int width, int height) {
-		super(x, y, 120, 100);
+		super(x, y, width, height);
 		
 	}
 
