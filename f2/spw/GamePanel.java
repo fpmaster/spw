@@ -26,8 +26,25 @@ public class GamePanel extends JPanel {
 		
 		big.setColor(Color.WHITE);		
 		big.drawString(String.format("%08d", reporter.getScore()), 300, 20);
+		//
+		big.setColor(Color.PINK);
+		big.fillOval ( 340, 60, 32, 32 );	
+		big.setColor(Color.BLACK);
+		big.fillOval(343,63,26,26);
+				
+				
+		big.setColor(Color.PINK);
+		big.fillOval ( 340, 100, 32, 32 );	
+		big.setColor(Color.BLACK);
+		big.fillOval(343,103,26,26);
+				
+		big.setColor(Color.PINK);
+		big.fillOval ( 340, 140, 32, 32 );	
+		big.setColor(Color.BLACK);
+		big.fillOval(343,143,26,26);
+			//	
 		
-	
+		
 		for(Sprite s : sprites){
 			s.draw(big);
 		}
