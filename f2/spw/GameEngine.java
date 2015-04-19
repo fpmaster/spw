@@ -21,10 +21,14 @@ public class GameEngine implements KeyListener, GameReporter{
 	private Timer timer;
 	
 	private long score = 0;
-	int a = 10;
-	int b = 363;
 	private int time = 0;
 	private int time1 = 0;
+	
+	public int xaxisHP = 10;
+	public int useItem = 0;
+	public int item = 0;
+	public int widthHP = 363;
+	
 	private double difficulty = 0.05;
 	private double difficulty1 = 0.003;
 	
@@ -114,10 +118,10 @@ public class GameEngine implements KeyListener, GameReporter{
 			er = e.getRectangle();
 			if(er.intersects(vr)){
 				if(time == 0){
-				a += 70;
-				b -= 70;
+				xaxisHP += 70;
+				widthHP -= 70;
 				time = 25;
-				if(a > 363){
+				if(xaxisHP > 363){
 					die();
 				}
 				return;
@@ -129,23 +133,24 @@ public class GameEngine implements KeyListener, GameReporter{
 				er1 = e1.getRectangle();
 				if(er1.intersects(vr)){
 					if(time1 == 0){
-						gp.sprites1.remove(e1);
+						//gp.sprites1.remove(e1);
 						e1.getIntersect();
-						
-						//System.out.println(item);
+						item++;
+
 					 time1 = 30;
 					return;
 					}
 				}
 			}
+		if(item > 3)
+			item=3;
 		
-		
-		
-		gp.HPgent(a,b);
+		gp.updateGameUI(this);
+		gp.HPgent(xaxisHP,widthHP);
 	}
 	
 	public void die(){
-	gp.HPgent(a,b);
+		gp.HPgent(xaxisHP,widthHP);
 		timer.stop();
 	}
 	
@@ -166,7 +171,30 @@ public class GameEngine implements KeyListener, GameReporter{
 		case KeyEvent.VK_UP:
 			v.move_Y(-1);
 			break;
+		 case KeyEvent.VK_Q:
+			if( item >= 1 && item <= 3){
+				
+					xaxisHP = 10;
+					widthHP = 363;
+					
+					
+				item--;
+			 if(item <= 0) 
+				item=0;
+			useItem++;
+			//System.out.println(d);
+			break;
+			}
 		}
+		if(useItem>0)	
+			useItem=0;
+	}
+	public int getItem(){
+		return item;
+	}
+
+	public int getUseItem(){
+		return useItem;
 	}
 
 	public long getScore(){

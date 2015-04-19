@@ -43,8 +43,27 @@ public class GamePanel extends JPanel {
 		big.setColor(Color.BLACK);
 		big.fillOval(343,143,26,26);
 			//	
-		
-		
+				if(reporter.getItem() == 1){ Itemgent1(); }
+				
+				if(reporter.getItem() == 2){ Itemgent2(); Itemgent1();}
+				
+				if(reporter.getItem() == 3){ Itemgent3(); Itemgent2(); Itemgent1();}
+				
+				if(reporter.getUseItem() == 1 && reporter.getItem() == 0)  {
+					Itemgent1();
+				}
+				
+				if(reporter.getUseItem() == 1 && reporter.getItem() == 1)  {
+					Itemgent4();
+				}
+
+				if(reporter.getUseItem() == 1 && reporter.getItem() == 2)  {
+						Itemgent1();
+				}
+				if(reporter.getUseItem() == 1 && reporter.getItem() == 3) {
+					Itemgent1();Itemgent2(); 
+				}
+		//
 		for(Sprite s : sprites){
 			s.draw(big);
 		}
@@ -87,7 +106,29 @@ public class GamePanel extends JPanel {
 		big.setBackground(color);
 		}
 		
-	
+	public void Itemgent1(){
+				big.setColor(Color.RED);
+				big.fillOval(343,63,26,26);
+				//big.setBackground(Color.BLACK);
+
+		}
+	public void Itemgent2(){
+				big.setColor(Color.RED);
+				big.fillOval(343,103,26,26);
+				//big.setBackground(Color.BLACK);
+
+		}
+	public void Itemgent3(){
+				big.setColor(Color.RED);
+				big.fillOval(343,143,26,26);
+				//big.setBackground(Color.BLACK);
+
+		}
+	public void Itemgent4(){
+					big.setColor(Color.BLACK);
+					big.fillOval(343,63,26,26);
+
+		}
 		
 
 	@Override

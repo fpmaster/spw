@@ -43,5 +43,7 @@ public class item extends Enemy{
 	public boolean isAlive(){
 		return alive;
 	}
-	
+	public void getIntersect(){
+		this.alive = false;
+	}
 }
