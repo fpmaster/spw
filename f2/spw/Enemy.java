@@ -40,6 +40,9 @@ public class Enemy extends Sprite{
 			alive = false;
 		}
 	}
+	public void getHit(){
+		this.alive = false;
+	}
 	
 	public boolean isAlive(){
 		return alive;

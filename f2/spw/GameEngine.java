@@ -90,7 +90,7 @@ public class GameEngine implements KeyListener, GameReporter{
 			if(!e.isAlive()){
 				e_iter.remove();
 				gp.sprites.remove(e);
-				score += 500;
+				score += 100;
 				if(score >= 5000 &&  score % 5000 == 0){
 				gp.RandomColor();
 				}
@@ -127,6 +127,7 @@ public class GameEngine implements KeyListener, GameReporter{
 		Rectangle2D.Double vr = v.getRectangle();
 		Rectangle2D.Double er;
 		Rectangle2D.Double er1; // item
+		Rectangle2D.Double br; //bullet
 		
 		for(Enemy e : enemies){
 			er = e.getRectangle();
@@ -141,6 +142,15 @@ public class GameEngine implements KeyListener, GameReporter{
 				return;
 			}
 		}
+		for(Bullet b : bullets){   
+				br = b.getRectangle();
+				if(br.intersects(er)){
+					score+=1000;
+				    e.getHit();
+					b.getHit();
+					return;
+					}
+				}
 		}
 		// item intersec
 		for(Enemy e1 : items){
