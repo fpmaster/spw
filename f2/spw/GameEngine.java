@@ -17,6 +17,7 @@ public class GameEngine implements KeyListener, GameReporter{
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();	
 	private ArrayList<Enemy> items = new ArrayList<Enemy>();
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	private ArrayList<Boss> Bosss = new ArrayList<Boss>();
 	
 	private SpaceShip v;	
 	
@@ -33,6 +34,9 @@ public class GameEngine implements KeyListener, GameReporter{
 	
 	private double difficulty = 0.05;
 	private double difficulty1 = 0.003;
+	
+	public int genboss = 0;
+	public int bossfix = 20;
 	
 	public GameEngine(GamePanel gp, SpaceShip v) {
 		this.gp = gp;
@@ -66,6 +70,12 @@ public class GameEngine implements KeyListener, GameReporter{
 				gp.sprites1.add(e1);
 				items.add(e1);
 		}
+		
+	private void generateBoss(){
+				Boss BB = new Boss((int)(Math.random()*390), 30);
+				gp.sprites.add(BB);
+				Bosss.add(BB);
+		}
 	
 	private void process(){
 		if(time >0)
@@ -73,8 +83,14 @@ public class GameEngine implements KeyListener, GameReporter{
 		
 		if(time1 >0)
 			time1--;
-	
+	    
+		if(genboss == bossfix){
+			generateBoss();
+			genboss =0;
+		}
+		
 		if(Math.random() < difficulty){
+			genboss ++;
 			generateEnemy();
 		}
 		if(Math.random() < difficulty1){
@@ -121,6 +137,18 @@ public class GameEngine implements KeyListener, GameReporter{
 			}
 		}
 		
+		
+		Iterator<Boss> boss_iter = Bosss.iterator(); 
+		while(boss_iter.hasNext()){
+			Boss BB = boss_iter.next();
+			BB.proceed();
+			
+			if(!BB.isAlive()){
+				boss_iter.remove();
+				gp.sprites.remove(BB);
+			}
+		}
+		
 		//
 		gp.updateGameUI(this);
 		
@@ -128,6 +156,8 @@ public class GameEngine implements KeyListener, GameReporter{
 		Rectangle2D.Double er;
 		Rectangle2D.Double er1; // item
 		Rectangle2D.Double br; //bullet
+		Rectangle2D.Double boss1; //boss
+		
 		
 		for(Enemy e : enemies){
 			er = e.getRectangle();
@@ -150,8 +180,38 @@ public class GameEngine implements KeyListener, GameReporter{
 					b.getHit();
 					return;
 					}
-				}
+					
+				for(Boss BB : Bosss){	
+				vr = v.getRectangle();
+				boss1 = BB.getRectangle();
+					if(boss1.intersects(br)){
+				    BB.hit();
+					b.getHit();
+					if(BB.GETHP_Boss() == 0){
+						BB.bossdie();
+					}
+					return;
+					}
+					
+			    }
+			}
 		}
+		
+		//boss to spaceship
+		for(Boss BB : Bosss){
+				vr = v.getRectangle();
+				boss1 = BB.getRectangle();
+				if(boss1.intersects(vr)){
+					xaxisHP = xaxisHP + 360;
+					widthHP = widthHP - 360;
+					 die();
+					return;
+				}	
+			}
+		
+		
+		
+		
 		// item intersec
 		for(Enemy e1 : items){
 				er1 = e1.getRectangle();

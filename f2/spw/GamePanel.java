@@ -8,9 +8,13 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+
+import java.awt.Toolkit;
+import java.awt.Image;
 public class GamePanel extends JPanel {
 	
 	private BufferedImage bi;	
+	
 	Graphics2D big;
 	ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 	ArrayList<Sprite> sprites1 = new ArrayList<Sprite>();
@@ -19,9 +23,11 @@ public class GamePanel extends JPanel {
 		bi = new BufferedImage(400, 600, BufferedImage.TYPE_INT_ARGB);
 		big = (Graphics2D) bi.getGraphics();
 		big.setBackground(Color.BLACK);
+		
 	}
 
 	public void updateGameUI(GameReporter reporter){
+	
 		big.clearRect(0, 0, 400, 600);
 		
 		big.setColor(Color.WHITE);		
