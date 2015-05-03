@@ -6,14 +6,16 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
-
-import java.awt.Toolkit;
-import java.awt.Image;
 public class GamePanel extends JPanel {
 	
 	private BufferedImage bi;	
+	private BufferedImage image;
 	
 	Graphics2D big;
 	ArrayList<Sprite> sprites = new ArrayList<Sprite>();
@@ -24,11 +26,19 @@ public class GamePanel extends JPanel {
 		big = (Graphics2D) bi.getGraphics();
 		big.setBackground(Color.BLACK);
 		
+		try{
+			image = ImageIO.read(getClass().getResourceAsStream("svemir21.jpg"));
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
 	}
 
 	public void updateGameUI(GameReporter reporter){
 	
 		big.clearRect(0, 0, 400, 600);
+		big.drawImage(image,0,0,null);
+		
 		
 		big.setColor(Color.WHITE);		
 		big.drawString(String.format("%08d", reporter.getScore()), 300, 20);

@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 
 
 	
+import java.awt.Toolkit;
+import java.awt.Image;
 public class Boss extends Sprite{
 
 	private int step = 1;
@@ -19,7 +21,6 @@ public class Boss extends Sprite{
 	public Boss(int x, int y) {
 		super(x-70, y,100,100);
 	}
-	
 	
 	@Override
 	public void draw(Graphics2D g) {

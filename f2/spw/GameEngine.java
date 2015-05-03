@@ -36,7 +36,7 @@ public class GameEngine implements KeyListener, GameReporter{
 	private double difficulty1 = 0.003;
 	
 	public int genboss = 0;
-	public int bossfix = 20;
+	public int bossfix = 60;
 	
 	public GameEngine(GamePanel gp, SpaceShip v) {
 		this.gp = gp;
@@ -76,8 +76,10 @@ public class GameEngine implements KeyListener, GameReporter{
 				gp.sprites.add(BB);
 				Bosss.add(BB);
 		}
+
 	
 	private void process(){
+		
 		if(time >0)
 			time--;
 		
@@ -138,11 +140,12 @@ public class GameEngine implements KeyListener, GameReporter{
 		}
 		
 		
+		
 		Iterator<Boss> boss_iter = Bosss.iterator(); 
 		while(boss_iter.hasNext()){
 			Boss BB = boss_iter.next();
 			BB.proceed();
-			
+		
 			if(!BB.isAlive()){
 				boss_iter.remove();
 				gp.sprites.remove(BB);
@@ -229,7 +232,7 @@ public class GameEngine implements KeyListener, GameReporter{
 		if(item > 3)
 			item=3;
 		
-		gp.updateGameUI(this);
+	
 		gp.HPgent(xaxisHP,widthHP);
 	}
 	
